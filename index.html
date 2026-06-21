@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMF Night Carnival</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Базовые настройки */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0a0b0c;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            /* Наложенный паттерн диагональных линий */
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 30px);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 40px;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+            background: rgba(10, 11, 12, 0.7);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            margin: 0 auto;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.7);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            background: rgba(255,255,255,0.05);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding-top: 80px;
+            
+            /* COMMENT: Вставьте сюда фоновое изображение для секции Hero (силуэт здания/деревьев) */
+            background-image: url('1.png'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10,11,12,0.8) 0%, rgba(10,11,12,0.4) 50%, rgba(10,11,12,1) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Плавающие камеры (ОБНОВЛЕННЫЙ СТИЛЬ: без рамок, размытие по краям) */
+        .cam-container {
+            position: absolute;
+            z-index: 2;
+        }
+
+        .cam-left {
+            top: 120px;
+            left: 12%;
+        }
+
+        .cam-mid {
+            top: 340px;
+            left: 0%;
+        }
+
+        .cam-box {
+            background: transparent; /* Убрали подложку */
+            border: none;            /* Убрали обводку */
+            padding: 0;              /* Убрали отступы */
+            max-width: 320px;
+            
+            /* Размытие/Затухание по краям */
+            -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%);
+            mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%);
+        }
+
+        .cam-box img {
+            width: 100%;
+            display: block;
+            filter: grayscale(100%);
+        }
+
+        .cam-label {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 8px;
+            color: #fff;
+            text-align: right; 
+        }
+
+        .hero h1 {
+            font-size: 70px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 14px;
+            letter-spacing: 0.1em;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            text-transform: uppercase;
+        }
+
+        .btn-play {
+            display: inline-block;
+            padding: 15px 60px;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-play:hover {
+            background: #fff;
+            color: #0a0b0c;
+        }
+
+        /* --- IDEA SECTION --- */
+        .section-idea {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 60px;
+            color: #eaeaea;
+        }
+
+        .split-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        .text-block {
+            flex: 1;
+        }
+
+        .text-block p {
+            font-size: 14px;
+            line-height: 2;
+            color: #e0e0e0;
+            letter-spacing: 0.05em;
+            font-weight: 400;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .image-block {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            right: -460px; /* Сдвигаем правее */
+        }
+
+        .image-block img {
+            width: 190%; /* Увеличили компьютер */
+            max-width: 190%;
+            height: auto;
+        }
+
+        /* --- DIFFERENCES SECTION --- */
+        .section-diff {
+            padding: 100px 0;
+        }
+
+        .diff-content {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        /* Обновили контейнер для ОДНОЙ фотографии */
+        .collage-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .collage-container img {
+            /* COMMENT: Вставьте сюда ОДНУ большую фотографию */
+            width: 140%;
+            height: auto; 
+            object-fit: cover;
+            filter: grayscale(100%);
+        }
+
+        .list-block {
+            flex: 1;
+            padding-top: 20px;
+        }
+
+        .list-block h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 30px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .list-block ul {
+            list-style: none;
+        }
+
+        .list-block li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 30px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #d0d0d0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .list-block li::before {
+            content: "•";
+            color: #fff;
+            position: absolute;
+            left: 0;
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #070809;
+        }
+
+        .footer-text {
+            font-size: 10px;
+            text-transform: uppercase;
+            line-height: 1.6;
+            color: #a0a0a0;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-dev {
+            padding: 12px 30px;
+            border: 1px solid #fff;
+            background: transparent;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-dev:hover {
+            background: #fff;
+            color: #0a0b0c;
+        }
+
+        /* Responsive for smaller screens */
+        @media (max-width: 900px) {
+            .split-content, .diff-content {
+                flex-direction: column;
+            }
+            .nav-links {
+                display: none; 
+            }
+            .hero h1 {
+                font-size: 40px;
+            }
+            .cam-container {
+                display: none;
+            }
+            .social-icons {
+                margin-left: auto;
+            }
+            .image-block {
+                right: 0;
+                width: 100%;
+                justify-content: center;
+            }
+            .image-block img {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-links">
+            <a href="#">ГЛАВНАЯ</a>
+            <a href="events.html">ИВЕНТЫ</a>
+            <a href="info.html">ИНФОРМАЦИЯ</a>
+            <a href="#">СПРАВКА</a>
+        </div>
+        <div class="social-icons">
+            <!-- Placeholder for Telegram -->
+            <a href="#"><img src="ic_baseline-telegram.png"></a>
+            <!-- Placeholder for VK -->
+            <a href="#"><img src="basil_vk-solid.png"></a>
+            <!-- Placeholder for YouTube -->
+            <a href="#"><img src="ic_baseline-discord.png"></a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        
+        <!-- CAM 3 -->
+        <div class="cam-container cam-left">
+            <div class="cam-box">
+                <!-- COMMENT: Вставьте сюда изображение для "CAM 3" -->
+                <img src="2.gif" alt="CAM 3">
+                <span class="cam-label">CAM 3: THE INTERROGATION ROOM</span>
+            </div>
+        </div>
+
+        <!-- CAM 5 -->
+        <div class="cam-container cam-mid">
+            <div class="cam-box">
+                 <!-- COMMENT: Вставьте сюда изображение для "CAM 5" -->
+                <img src="3.gif" alt="CAM 5">
+                <span class="cam-label">CAM 5: THE SOUTHERN CORRIDOR</span>
+            </div>
+        </div>
+
+        <div class="hero-content container">
+            <h1>TMF MASTER FIGHTER</h1>
+            <p>ДОБРО ПОЖАЛОВАТЬ НА НАШ ПРОЕКТ ИГРАЙ, ВЕСЕЛИСЬ<br>И СТАНЬ ОДНИМ ИЗ СВИДЕТЕЛЕЙ ПАРАНОРМАЛЬНОГО</p>
+            <a href="#" class="btn-play">ИГРАТЬ</a>
+        </div>
+    </section>
+
+    <section class="section-idea container">
+        <h2 class="section-title">ИДЕЯ НАШЕГО ПРОЕКТА</h2>
+        <div class="split-content">
+            <div class="text-block">
+                <p>НАША ИДЕЯ ПРОСТА: МЫ СОЗДАЕМ УЮТНОЕ СООБЩЕСТВО ФАНАТОВ SCP, ОБЪЕДИНЯЯ ЛЮБИТЕЛЕЙ ИГРЫ ИНТЕРЕСНЫМИ ИВЕНТАМИ И СВЕЖИМИ ОБНОВЛЕНИЯМИ.</p>
+                <p>ВМЕСТЕ МЫ ДЕЛАЕМ СЕРВЕР МЕСТОМ ПРИТЯЖЕНИЯ ДЛЯ ВСЕХ ЦЕНИТЕЛЕЙ НЕОБЫЧНЫХ ПРИКЛЮЧЕНИЙ И ДРУЖЕСКОГО ОБЩЕНИЯ. ПРИСОЕДИНЯЙСЯ И НАЙДИ СВОЮ КОМПАНИЮ ЕДИНОМЫШЛЕННИКОВ!</p>
+            </div>
+            <div class="image-block">
+                <!-- COMMENT: Вставьте сюда изображение компьютера (будет большим и правее). -->
+                <img src="4.png" alt="Retro Computer">
+            </div>
+        </div>
+    </section>
+
+    <section class="section-diff container">
+        <h2 class="section-title">ЧЕМ МЫ ОТЛИЧАЕМСЯ ОТ ДРУГИХ?</h2>
+        <div class="diff-content">
+            <!-- ОДНА ФОТОГРАФИЯ -->
+            <div class="collage-container">
+                <!-- COMMENT: Вставьте сюда ОДНУ большую фотографию -->
+                <img src="8.png">
+            </div>
+            <div class="list-block">
+                <h4>НАШ СЕРВЕР ПРЕДЛАГАЕТ:</h4>
+                <ul>
+                    <li>МНОГО ИНТЕРЕСНЫХ И РАЗНООБРАЗНЫХ ИВЕНТОВ, КОТОРЫЕ ПОДАРЯТ МАССУ ЭМОЦИЙ И ВЕСЕЛЬЯ.</li>
+                    <li>ОБЩИТЕЛЬНЫХ АДМИНИСТРАТОРОВ, ГОТОВЫХ ПОДДЕРЖАТЬ РАЗГОВОР И ПОМОЧЬ НОВИЧКАМ.</li>
+                    <li>ПРОСТЫЕ И ПОНЯТНЫЕ ПРАВИЛА, СОБЛЮДАЯ КОТОРЫЕ КАЖДЫЙ СМОЖЕТ КОМФОРТНО ИГРАТЬ.</li>
+                    <li>ВОЗМОЖНОСТЬ СОЗДАТЬ СОБСТВЕННЫЙ КЛАН И ВЫДЕЛЯТЬСЯ УНИКАЛЬНЫМ ТЕГОМ СРЕДИ ИГРОКОВ.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-text">
+            Все права защищены<br>
+            Создано от одобрения администрации сервера в<br>
+            SCP: Containment Breach Multiplayer
+        </div>
+        <a href="#" class="btn-dev">РАЗРАБОТЧИКИ</a>
+    </footer>
+
+</body>
+</html>

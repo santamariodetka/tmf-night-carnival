@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMF Night Carnival - Информация</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Базовые настройки */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0a0b0c;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 30px);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 40px;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+            background: rgba(10, 11, 12, 0.7);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            margin: 0 auto;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.7);
+            padding: 5px 15px;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a.active {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            background: rgba(255,255,255,0.05);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .social-icons a:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding-top: 120px;
+            padding-bottom: 40px;
+            
+            /* COMMENT: Вставьте сюда фоновую картинку */
+            background-color: #0a0b0c;
+            background-image: url('11.gif');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 11, 12, 0.7);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            text-transform: uppercase;
+            color: #d0d0d0;
+        }
+
+        .btn-action {
+            display: inline-block;
+            padding: 12px 50px;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-action:hover {
+            background: #fff;
+            color: #0a0b0c;
+        }
+
+        /* --- CARDS SECTION --- */
+        .section-cards {
+            padding: 80px 0 60px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .card {
+            border: 1px solid #fff;
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 250px;
+            background: transparent; /* Убрали темный фон */
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* КАРТИНКИ В КАРТОЧКАХ: БЕЗ ФОНА, БЕЗ Ч/Б, ПОЛНОСТЬЮ ВПИСАНЫ */
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Изображение влезает целиком без обрезания */
+            /* filter: grayscale(100%); <- Убрали ч/б */
+        }
+
+        .card h3 {
+            font-size: 26px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .btn-more {
+            display: inline-block;
+            padding: 10px 50px;
+            border: 1px solid #fff;
+            background: transparent;
+            color: #fff;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-more:hover {
+            background: #fff;
+            color: #0a0b0c;
+        }
+
+        /* --- QUESTIONS SECTION --- */
+        .section-questions {
+            padding: 80px 0 120px;
+        }
+
+        .questions-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .bottles-side {
+            flex: 1;
+            position: relative;
+            height: 750px; /* Увеличили высоту для больших бутылок */
+            max-width: 800px; /* Увеличили ширину контейнера */
+            display: flex;
+            justify-content: center;
+        }
+
+        /* УВЕЛИЧЕННЫЕ БУТЫЛКИ */
+        .bottle {
+            position: absolute;
+            max-width: 400px; /* Сильно увеличили размер */
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .bottle-top {
+            top: 40px;
+            left: 0px;
+            transform: rotate(-15deg);
+            z-index: 1;
+        }
+
+        .bottle-bottom {
+            bottom: 40px;
+            left: 150px;
+            transform: rotate(15deg);
+            z-index: 2;
+        }
+
+        .text-side {
+            flex: 1.3;
+        }
+
+        .text-side h2 {
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 30px;
+        }
+
+        .text-side p {
+            font-size: 13px;
+            line-height: 2;
+            color: #d0d0d0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+
+        .btn-discord {
+            display: inline-block;
+            padding: 18px 60px;
+            border: 2px solid #fff;
+            background: transparent;
+            color: #fff;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        .btn-discord:hover {
+            background: #fff;
+            color: #0a0b0c;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #070809;
+        }
+
+        .footer-text {
+            font-size: 10px;
+            text-transform: uppercase;
+            line-height: 1.6;
+            color: #a0a0a0;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-dev {
+            padding: 12px 30px;
+            border: 1px solid #fff;
+            background: transparent;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-dev:hover {
+            background: #fff;
+            color: #0a0b0c;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .questions-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .bottles-side {
+                display: none; /* Скрываем бутылки на телефоне */
+                height: auto;
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+            .nav-links {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-links">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="events.html">ИВЕНТЫ</a>
+            <a href="info.html">ИНФОРМАЦИЯ</a>
+            <a href="#">СПРАВКА</a>
+        </div>
+        <div class="social-icons">
+                        <!-- Placeholder for Telegram -->
+            <a href="#"><img src="ic_baseline-telegram.png"></a>
+            <!-- Placeholder for VK -->
+            <a href="#"><img src="basil_vk-solid.png"></a>
+            <!-- Placeholder for YouTube -->
+            <a href="#"><img src="ic_baseline-discord.png"></a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content container">
+            <h1>ИНФОРМАЦИЯ ОТ TMF</h1>
+            <p>КОНЕЧНО, ПОМОЧЬ НАМ В ОТВЕТЕ НА ВОПРОСЫ<br>МЫ БУДЕМ БЛАГОДАРНЫ ВАМ ЗА ПРОДЕЛАННУЮ РАБОТУ</p>
+            <a href="#" class="btn-action">ОТВЕТИТЬ НА ВОПРОСЫ</a>
+        </div>
+    </section>
+
+    <section class="section-cards container">
+        <div class="cards-grid">
+            <!-- Карточка 1 -->
+            <div class="card">
+                <div class="card-img">
+                    <!-- COMMENT: Вставьте сюда цветную PNG-картинку с прозрачным фоном для Персонажей -->
+                    <img src="Group 54.png" alt="Персонажи">
+                </div>
+                <h3>ПЕРСОНАЖИ</h3>
+                <a href="#" class="btn-more">ПОДРОБНЕЕ</a>
+            </div>
+            <!-- Карточка 2 -->
+            <div class="card">
+                <div class="card-img">
+                    <!-- COMMENT: Вставьте сюда цветную PNG-картинку с прозрачным фоном для Предметов -->
+                    <img src="Mask group.png" alt="Предметы">
+                </div>
+                <h3>ПРЕДМЕТЫ</h3>
+                <a href="#" class="btn-more">ПОДРОБНЕЕ</a>
+            </div>
+            <!-- Карточка 3 -->
+            <div class="card">
+                <div class="card-img">
+                    <!-- COMMENT: Вставьте сюда цветную PNG-картинку с прозрачным фоном для Локаций -->
+                    <img src="Group 40.png" alt="Локации">
+                </div>
+                <h3>ЛОКАЦИИ</h3>
+                <a href="#" class="btn-more">ПОДРОБНЕЕ</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-questions container">
+        <div class="questions-content">
+            <div class="bottles-side">
+                <!-- COMMENT: Вставьте сюда две прозрачные PNG-картинки увеличенных бутылок (например, Coca-Cola) -->
+                <img src="12.png" alt="Бутылка 1" class="bottle bottle-top">
+                <img src="12.png" alt="Бутылка 2" class="bottle bottle-bottom">
+            </div>
+            <div class="text-side">
+                <h2>ВОПРОСЫ И ПРЕДЛОЖЕНИЯ</h2>
+                <p>ЕСЛИ У ВАС ЕСТЬ ВОПРОСЫ ИЛИ СВЕЖИЕ ИДЕИ — СМЕЛО ДЕЛИТЕСЬ ИМИ С НАМИ. НАМ ПРИЯТНО ПОЛУЧАТЬ ОБРАТНУЮ СВЯЗЬ ОТ ВАС, И МЫ ОПЕРАТИВНО ОТРЕАГИРУЕМ НА ЛЮБОЕ ОБРАЩЕНИЕ. ВАШЕ МНЕНИЕ ДЕЙСТВИТЕЛЬНО ВАЖНО ДЛЯ НАС, ОНО ПОМОГАЕТ СТАНОВИТЬСЯ ЛУЧШЕ И ИНТЕРЕСНЕЕ.</p>
+                <a href="#" class="btn-discord">ПЕРЕЙТИ В DISCORD</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-text">
+            Все права защищены<br>
+            Создано от одобрения администрации сервера в<br>
+            SCP: Containment Breach Multiplayer
+        </div>
+        <a href="#" class="btn-dev">РАЗРАБОТЧИКИ</a>
+    </footer>
+
+</body>
+</html>
